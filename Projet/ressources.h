@@ -1,4 +1,4 @@
-// ressources.h (Updated)
+// ressources.h
 #pragma once
 
 #define IDI_MYICON   101

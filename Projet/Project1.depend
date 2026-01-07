@@ -35,3 +35,18 @@
 
 1767375879 c:\users\acer\videos\test\ressources.h
 
+1767373666 source:g:\mon drive\mastermind\projet\ressources.rc
+	<windows.h>
+	"ressources.h"
+
+1767801845 g:\mon drive\mastermind\projet\ressources.h
+
+1767802944 source:g:\mon drive\mastermind\projet\main.c
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<commctrl.h>
+	"ressources.h"
+

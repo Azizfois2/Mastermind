@@ -5,9 +5,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include <string.h>
-#include <fcntl.h>
 #include <time.h>
 #include <commctrl.h>
 #include "ressources.h"
@@ -152,7 +150,7 @@ void Generateunique(int code[])
 	}
 }
 
-//Fonctions Vitales
+//Procedures Vitales
 
 void Update(HWND hDlg)
 {
@@ -213,36 +211,36 @@ int scorefs(PS player[], int max)
 {
     FILE *f = fopen("scores.txt", "r");
     int hsb = 0;
-    
+
     if (!f) {
         return 0;
     }
-    
+
     char line[128];
-    
+
     while (hsb < max && fgets(line, sizeof(line), f) != NULL)
     {
-        
+
         line[strcspn(line, "\n")] = 0;
-        
-        
+
+
         char *dash = strstr(line, " - ");
-        
+
         if (dash != NULL)
         {
-            
+
             int nameLen = dash - line;
             if (nameLen > 0 && nameLen < 50) {
                 strncpy(player[hsb].nom, line, nameLen);
                 player[hsb].nom[nameLen] = '\0';
             }
-            
-            
+
+
             player[hsb].score = atoi(dash + 3);
             hsb++;
         }
     }
-    
+
     fclose(f);
     return hsb;
 }
@@ -251,19 +249,19 @@ int scorefs2(PS player[], int max)
 {
     FILE *f = fopen("scores2.txt", "r");
     int hsb = 0;
-    
+
     if (!f) {
         return 0;
     }
-    
+
     char line[128];
-    
+
     while (hsb < max && fgets(line, sizeof(line), f) != NULL)
     {
         line[strcspn(line, "\n")] = 0;
-        
+
         char *dash = strstr(line, " - ");
-        
+
         if (dash != NULL)
         {
             int nameLen = dash - line;
@@ -271,12 +269,12 @@ int scorefs2(PS player[], int max)
                 strncpy(player[hsb].nom, line, nameLen);
                 player[hsb].nom[nameLen] = '\0';
             }
-            
+
             player[hsb].score = atoi(dash + 3);
             hsb++;
         }
     }
-    
+
     fclose(f);
     return hsb;
 }
@@ -286,7 +284,7 @@ int scorefm(const char *nom, int nscore)
     PS player[100];
     int hsb = scorefs(player, 100);
     int hsslti = 0;
-    int totalScore = 0; 
+    int totalScore = 0;
 
     for (e = 0; e < hsb; e++)
     {
@@ -418,7 +416,6 @@ CreateWindowEx(
 		    hInstance,
 		    NULL
 			);
-            // Reset button handles
             hBtnJone = NULL;
             hBtnJtwo = NULL;
             hBtnC = NULL;
@@ -544,6 +541,16 @@ CreateWindowEx(
                         MessageBox(hDlg, "Entrez exactement 5 chiffres.", "SVP", MB_OK);
                         return TRUE;
                     }
+                     if (g_mode == MODE_FACILE) {
+                        for (i = 0; i < CODE_LENGTH; i++) {
+                            for (j = i + 1; j < CODE_LENGTH; j++) {
+                                if (*(p+i) == *(p+j)) {
+                                    MessageBox(hDlg, "Pas de doublons en mode facile", "Attention", MB_ICONERROR);
+                                    return TRUE;                                }
+                            }
+                        }
+                    }
+
 
                     // Validation des chiffres
                     for (i = 0; i < CODE_LENGTH; i++) {
@@ -704,7 +711,7 @@ CreateWindowEx(
     }
     return FALSE;
 }
-//Interface graphique intiale
+//Interface graphique initiale
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) {
     HDC hdc;
     PAINTSTRUCT ps;
@@ -786,7 +793,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
                         InputDlgProc
                     );
                     return 0;
-            case IDBUTTON_ABOUT: 
+            case IDBUTTON_ABOUT:
             MessageBox(hwnd,
                 "Mastermind - Jeu de déduction\n\n"
                 "Version Finale\n"
