@@ -38,9 +38,9 @@ typedef enum {
 } GameState;
 
 typedef struct {
-	char nom[50];
-	int score;
-}PS;
+    char nom[50];
+    int score;
+} PS;
 
 GameState g_currentState = STATE_PLAYER1_SETUP;
 
@@ -126,28 +126,28 @@ static int pt = MAX_ATTEMPTS;
 
 void Generate(int code[])
 {
-	int w;
-	for (w=0; w<CODE_LENGTH; w++)
-	{
-		code[w]=rand()%10;
-	}
+    int w;
+    for (w=0; w<CODE_LENGTH; w++)
+    {
+        code[w]=rand()%10;
+    }
 }
 
 void Generateunique(int code[])
 {
-	int us[10]={0};
-	int q;
-	for (q=0;q<CODE_LENGTH;q++)
-	{
-		int n;
-		do
-		{
-			n= rand()%10;
-		}
-		while (us[n]!=0);
-		code[q]=n;
-		us[n]=1;
-	}
+    int us[10]={0};
+    int q;
+    for (q=0;q<CODE_LENGTH;q++)
+    {
+        int n;
+        do
+        {
+            n= rand()%10;
+        }
+        while (us[n]!=0);
+        code[q]=n;
+        us[n]=1;
+    }
 }
 
 //Procedures Vitales
@@ -203,9 +203,10 @@ void chg(HWND hDlg, HINSTANCE hInstance, HWND *phBtnJone, HWND *phBtnJtwo, HWND 
 
     ShowWindow(*phBtnJone, SW_HIDE);
     EnableWindow(*phBtnJone, FALSE);
-	ShowWindow(*phBtnJtwo, SW_HIDE);
+    ShowWindow(*phBtnJtwo, SW_HIDE);
     EnableWindow(*phBtnJtwo, FALSE);
 }
+
 //Fonctions score
 int scorefs(PS player[], int max)
 {
@@ -220,21 +221,17 @@ int scorefs(PS player[], int max)
 
     while (hsb < max && fgets(line, sizeof(line), f) != NULL)
     {
-
         line[strcspn(line, "\n")] = 0;
-
 
         char *dash = strstr(line, " - ");
 
         if (dash != NULL)
         {
-
             int nameLen = dash - line;
             if (nameLen > 0 && nameLen < 50) {
                 strncpy(player[hsb].nom, line, nameLen);
                 player[hsb].nom[nameLen] = '\0';
             }
-
 
             player[hsb].score = atoi(dash + 3);
             hsb++;
@@ -278,6 +275,7 @@ int scorefs2(PS player[], int max)
     fclose(f);
     return hsb;
 }
+
 int scorefm(const char *nom, int nscore)
 {
     int e;
@@ -319,6 +317,7 @@ int scorefm(const char *nom, int nscore)
 
     return totalScore;
 }
+
 int scoremax(const char *nom)
 {
     int v;
@@ -393,6 +392,7 @@ INT_PTR CALLBACK NameDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
     }
     return FALSE;
 }
+
 // Interface graphique joueur1
 INT_PTR CALLBACK InputDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -405,17 +405,17 @@ INT_PTR CALLBACK InputDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
             ResetGame();
             SendDlgItemMessage(hDlg, IDC_NUMBER_INPUT, EM_SETLIMITTEXT, CODE_LENGTH, 0);
             ShowWindow(GetDlgItem(hDlg, IDC_TENTATIVES), SW_HIDE);
-CreateWindowEx(
-		    0,
-		    "BUTTON",
-		    "Code alératoire",
-		    WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-		    180, 95, 120, 25,
-		    hDlg,
-		    (HMENU)IDC_RANDOM_BUTTON,
-		    hInstance,
-		    NULL
-			);
+            CreateWindowEx(
+                0,
+                "BUTTON",
+                "Code aléatoire",
+                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+                180, 95, 120, 25,
+                hDlg,
+                (HMENU)IDC_RANDOM_BUTTON,
+                hInstance,
+                NULL
+            );
             hBtnJone = NULL;
             hBtnJtwo = NULL;
             hBtnC = NULL;
@@ -465,7 +465,6 @@ CreateWindowEx(
                         return TRUE;
                     }
 
-
                     char msg[64];
                     snprintf(msg, sizeof(msg), "Le chiffre à l'index %d est %d", index, number);
                     MessageBox(hDlg, msg, "Joker 1", MB_OK);
@@ -514,20 +513,20 @@ CreateWindowEx(
 
                 //Generateur de nombre
                 case IDC_RANDOM_BUTTON:
-                	{
-                		if (g_mode==MODE_FACILE)
-                		{
-                			Generateunique(c);
-						}
-						else
-						{
-							Generate(c);
-						}
-						MessageBox(hDlg,"Code généré automatiquement\nAu tour du Joueur 2.","Information",MB_OK|MB_ICONINFORMATION);
-						ShowWindow(GetDlgItem(hDlg, IDC_RANDOM_BUTTON),SW_HIDE);
-						chg(hDlg, hInstance, &hBtnJone, &hBtnJtwo, &hBtnC);
-                        return TRUE;
-					}
+                {
+                    if (g_mode==MODE_FACILE)
+                    {
+                        Generateunique(c);
+                    }
+                    else
+                    {
+                        Generate(c);
+                    }
+                    MessageBox(hDlg,"Code généré automatiquement\nAu tour du Joueur 2.","Information",MB_OK|MB_ICONINFORMATION);
+                    ShowWindow(GetDlgItem(hDlg, IDC_RANDOM_BUTTON),SW_HIDE);
+                    chg(hDlg, hInstance, &hBtnJone, &hBtnJtwo, &hBtnC);
+                    return TRUE;
+                }
 
                 // Interface graphique joueur2
                 case IDC_C_BUTTON: {
@@ -541,16 +540,16 @@ CreateWindowEx(
                         MessageBox(hDlg, "Entrez exactement 5 chiffres.", "SVP", MB_OK);
                         return TRUE;
                     }
-                     if (g_mode == MODE_FACILE) {
+                    if (g_mode == MODE_FACILE) {
                         for (i = 0; i < CODE_LENGTH; i++) {
                             for (j = i + 1; j < CODE_LENGTH; j++) {
                                 if (*(p+i) == *(p+j)) {
                                     MessageBox(hDlg, "Pas de doublons en mode facile", "Attention", MB_ICONERROR);
-                                    return TRUE;                                }
+                                    return TRUE;
+                                }
                             }
                         }
                     }
-
 
                     // Validation des chiffres
                     for (i = 0; i < CODE_LENGTH; i++) {
@@ -577,76 +576,68 @@ CreateWindowEx(
                         MessageBox(hDlg, resultat, "Résultat de l'essai", MB_OK);
                     }
 
-                     if (pt <= JOKER_AVAILABLE_THRESHOLD && joker_used == 0) {
+                    if (pt <= JOKER_AVAILABLE_THRESHOLD && joker_used == 0) {
+                        if (pt > JOKER1_COST) {
+                            ShowWindow(hBtnJone, SW_SHOW);
+                            EnableWindow(hBtnJone, TRUE);
+                        } else {
+                            ShowWindow(hBtnJone, SW_HIDE);
+                            EnableWindow(hBtnJone, FALSE);
+                        }
 
-        if (pt >= JOKER1_COST) {
-            ShowWindow(hBtnJone, SW_SHOW);
-            EnableWindow(hBtnJone, TRUE);
-        } else {
-            ShowWindow(hBtnJone, SW_HIDE);
-            EnableWindow(hBtnJone, FALSE);
-        }
+                        if (pt > JOKER2_COST) {
+                            ShowWindow(hBtnJtwo, SW_SHOW);
+                            EnableWindow(hBtnJtwo, TRUE);
+                        } else {
+                            ShowWindow(hBtnJtwo, SW_HIDE);
+                            EnableWindow(hBtnJtwo, FALSE);
+                        }
+                        InvalidateRect(hDlg, NULL, TRUE);
+                    }
 
-        if (pt >= JOKER2_COST) {
-            ShowWindow(hBtnJtwo, SW_SHOW);
-            EnableWindow(hBtnJtwo, TRUE);
-        } else {
-            ShowWindow(hBtnJtwo, SW_HIDE);
-            EnableWindow(hBtnJtwo, FALSE);
-        }
-		InvalidateRect(hDlg, NULL, TRUE);
-    }
+                    if (l == CODE_LENGTH)
+                    {
+                        int score = pt * SCORE_MULTIPLIER;
+                        char playerName[32] = {0};
 
+                        int ret = DialogBoxParam(
+                            hInstance,
+                            MAKEINTRESOURCE(IDD_NAME_DIALOG),
+                            hDlg,
+                            NameDlgProc,
+                            (LPARAM)playerName
+                        );
 
-                   if (l == CODE_LENGTH)
-{
+                        if (ret == -1)
+                        {
+                            MessageBox(hDlg, "Erreur lors de l'ouverture de la boîte de dialogue!", "Erreur", MB_OK | MB_ICONERROR);
+                            EndDialog(hDlg, IDCANCEL);
+                            return TRUE;
+                        }
+                        char message[256];
+                        int cumul, meilleur;
 
-                int score = pt * SCORE_MULTIPLIER;
-                char playerName[32] = {0};
+                        if (ret == IDOK && strlen(playerName) > 0)
+                        {
+                            cumul=scorefm(playerName, score);
+                            FILE *f = fopen("scores2.txt", "a");
+                            if (f)
+                            {
+                                fprintf(f, "%s - %d\n", playerName, score);
+                                fclose(f);
+                            }
+                            meilleur=scoremax(playerName);
+                            snprintf(message, sizeof(message), "Félicitations %s!\nVous avez trouvé le code!\nScore: %d XP\nScore cumulée: %d XP\nMeilleur Score: %d XP", playerName, score, cumul, meilleur);
+                        }
+                        else
+                        {
+                            snprintf(message, sizeof(message), "Vous avez trouvé le code!\nScore: %d XP", score);
+                        }
 
-                int ret = DialogBoxParam(
-                hInstance,
-                MAKEINTRESOURCE(IDD_NAME_DIALOG),
-                hDlg,
-                NameDlgProc,
-                (LPARAM)playerName
-                );
-
-                   if (ret == -1)
-            {
-               MessageBox(hDlg, "Erreur lors de l'ouverture de la boîte de dialogue!", "Erreur", MB_OK | MB_ICONERROR);
-               EndDialog(hDlg, IDCANCEL);
-                return TRUE;
-            }
-            char message[256];
-            int cumul, meilleur;
-
-
-            if (ret == IDOK && strlen(playerName) > 0)
-			{
-			   cumul=scorefm(playerName, score);
-			   FILE *f = fopen("scores2.txt", "a");
-	        if (f)
-	   {
-	        fprintf(f, "%s - %d\n", playerName, score);
-	        fclose(f);
-       }
-			   meilleur=scoremax(playerName);
-               snprintf(message, sizeof(message), "Félicitations %s!\nVous avez trouvé le code!\nScore: %d XP\nScore cumulée: %d XP\nMeilleur Score: %d XP", playerName, score,cumul, meilleur);
-            }
-	        else
-	        {
-               snprintf(message, sizeof(message), "Vous avez trouvé le code!\nScore: %d XP", score);
-            }
-
-            MessageBox(hDlg, message, "Victoire!", MB_OK | MB_ICONINFORMATION);
-
-
-
-
-            EndDialog(hDlg, IDCANCEL);
-            return TRUE;
-}
+                        MessageBox(hDlg, message, "Victoire!", MB_OK | MB_ICONINFORMATION);
+                        EndDialog(hDlg, IDCANCEL);
+                        return TRUE;
+                    }
 
                     if (pt == 0) {
                         char topsecret[32];
@@ -706,11 +697,12 @@ CreateWindowEx(
                 case IDCANCEL:
                     EndDialog(hDlg, IDCANCEL);
                     return TRUE;
-           }
+            }
             break;
     }
     return FALSE;
 }
+
 //Interface graphique initiale
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) {
     HDC hdc;
@@ -793,30 +785,32 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
                         InputDlgProc
                     );
                     return 0;
-            case IDBUTTON_ABOUT:
-            MessageBox(hwnd,
-                "Mastermind - Jeu de déduction\n\n"
-                "Version Finale\n"
-                "Créé par: Abdelaziz Mohammad Aamer Al Harbi et Youssef Aziz\n\n"
-                "Comment jouer:\n"
-                "• Le Joueur 1 entre un code secret de 5 chiffres ou génère un code alératoire\n"
-                "• Le Joueur 2 essaie de deviner le code\n"
-                "• Bien placés = bon chiffre, bonne position\n"
-                "• Mal placés = bon chiffre, mauvaise position\n\n"
-                "Nombre d\'essais: 20 essais\n"
-                "Modes:\n"
-                "• Débutant: Chiffres tous différents\n"
-                "• Expert: Chiffres peuvent se répéter\n\n"
-                "Jokers (disponibles après 10 tentatives):\n"
-                "• Joker 1: Révèle un chiffre (coût: 3 tentatives)\n"
-                "• Joker 2: Indique un chiffre absent (coût: 5 tentatives)\n\n"
-                "Bonne chance!",
-                "À propos de Mastermind",
-                MB_OK | MB_ICONINFORMATION);
-            return 0;
-case ID_FILE_QUIT:
-            PostQuitMessage(0);
-            return 0;
+
+                case IDBUTTON_ABOUT:
+                    MessageBox(hwnd,
+                        "Mastermind - Jeu de déduction\n\n"
+                        "Version Finale\n"
+                        "Créé par: Abdelaziz Mohammad Aamer Al Harbi et Youssef Aziz\n\n"
+                        "Comment jouer:\n"
+                        "• Le Joueur 1 entre un code secret de 5 chiffres ou génère un code aléatoire\n"
+                        "• Le Joueur 2 essaie de deviner le code\n"
+                        "• Bien placés = bon chiffre, bonne position\n"
+                        "• Mal placés = bon chiffre, mauvaise position\n\n"
+                        "Nombre d'essais: 20 essais\n"
+                        "Modes:\n"
+                        "• Débutant: Chiffres tous différents\n"
+                        "• Expert: Chiffres peuvent se répéter\n\n"
+                        "Jokers (disponibles après 10 tentatives):\n"
+                        "• Joker 1: Révèle un chiffre (coût: 3 tentatives)\n"
+                        "• Joker 2: Indique un chiffre absent (coût: 5 tentatives)\n\n"
+                        "Bonne chance!",
+                        "À propos de Mastermind",
+                        MB_OK | MB_ICONINFORMATION);
+                    return 0;
+
+                case ID_FILE_QUIT:
+                    PostQuitMessage(0);
+                    return 0;
             }
             break;
 
@@ -833,6 +827,7 @@ case ID_FILE_QUIT:
     }
     return 0;
 }
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     WNDCLASSEX wc;
     HWND hwnd;

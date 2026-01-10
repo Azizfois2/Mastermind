@@ -2,8 +2,10 @@ Youssef - 3900
 Testuser - 2400
 Test - 2400
 Mohammad Ougarri - 5700
-Youssef Aziz - 2700
+Youssef Aziz - 6700
 Ilyas Essaih - 2000
 Youssef Ait Atmane - 2000
 Rayane Bensrhir - 2000
-Abdelaziz Al Harbi - 4000
+Abdelaziz Al Harbi - 4600
+ACHRAF - 1900
+ABDO - 2000

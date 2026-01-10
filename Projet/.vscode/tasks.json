@@ -1,0 +1,49 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile Resources",
+            "type": "shell",
+            "command": "C:\\MinGW\\bin\\windres.exe",
+            "args": [
+                "ressources.rc",
+                "-O", "coff",
+                "-o", "ressources.res"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe build active file",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-finput-charset=CP1252",
+                "-fexec-charset=CP1252",
+                "${file}",
+                "ressources.res",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-mwindows",
+                "-lcomctl32",
+                "-lgdi32"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "compiler: C:\\MinGW\\bin\\gcc.exe",
+            "dependsOn": ["Compile Resources"]
+        }
+    ]
+}
