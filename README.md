@@ -140,23 +140,32 @@ Le meilleur score est le maximum des lignes de `scores2.txt` pour le pseudo exac
 
 ## Compilation
 
-Le projet est prévu pour **Windows** et une chaîne **MinGW/GCC**.
+Le projet est prévu pour **Windows** et une chaîne **MinGW/GCC**. La compilation produit `build/Mastermind.exe`.
+
+### Make (recommandé)
+
+Depuis la racine du dépôt :
+
+```bat
+mingw32-make
+mingw32-make run
+```
+
+`mingw32-make clean` supprime les objets et l'exécutable. Le `Makefile` conserve l'encodage d'origine des sources (`CP1252`) et compile les ressources avec `windres`.
 
 ### Code::Blocks
 
-Ouvrir `Projet/Project1.cbp`, puis *Build and run*.
+Ouvrir `Mastermind.cbp`, puis *Build and run*. La sortie est configurée vers `build/`.
 
 ### Dev-C++
 
-Ouvrir `Projet/Project1.dev`, ou utiliser `Projet/Makefile.win`.
+Ouvrir `Mastermind.dev` ; la sortie est également placée dans `build/`.
 
 ### Ligne de commande (MinGW)
 
-Depuis le dossier `Projet` :
-
 ```bat
-windres -i ressources.rc -o ressources.o
-gcc -O2 main.c ressources.o -o Mastermind.exe -mwindows -lcomctl32 -lgdi32
+windres -I src -I resources resources/resources.rc -o build/resources.o
+gcc -O2 -g -Wall -std=c99 -finput-charset=CP1252 -fexec-charset=CP1252 -I src src/main.c build/resources.o -o build/Mastermind.exe -mwindows -lcomctl32 -lgdi32
 ```
 
 `-mwindows` évite l'ouverture d'une console ; `comctl32` et `gdi32` sont nécessaires pour les contrôles communs, les infobulles et l'affichage du bitmap.
@@ -165,12 +174,15 @@ gcc -O2 main.c ressources.o -o Mastermind.exe -mwindows -lcomctl32 -lgdi32
 
 | Fichier | Rôle |
 | --- | --- |
-| `Projet/main.c` | Logique du jeu, procédures de dialogue et gestion des scores |
-| `Projet/ressources.h` | Constantes des ressources et dimensions du jeu |
-| `Projet/ressources.rc` | Dialogues, menu, icône et bitmap |
-| `Projet/master.bmp`, `master.ico` | Ressources graphiques |
-| `Projet/Project1.cbp` | Projet Code::Blocks |
-| `Projet/Project1.dev`, `Makefile.win` | Projet et makefile Dev-C++ |
+| `src/main.c` | Logique du jeu, procédures de dialogue et gestion des scores |
+| `src/resources.h` | Constantes des ressources et dimensions du jeu |
+| `resources/resources.rc` | Dialogues, menu, icône et bitmap |
+| `resources/master.bmp`, `master.ico` | Ressources graphiques |
+| `Mastermind.cbp` | Projet Code::Blocks |
+| `Mastermind.dev` | Projet Dev-C++ |
+| `Makefile` | Compilation MinGW en ligne de commande |
+| `build/` | Sortie de compilation (ignorée par Git) |
+| `.vscode/` | Configuration VS Code (IntelliSense, build, débogage) |
 
 ## Détails d'implémentation
 
@@ -193,7 +205,7 @@ gcc -O2 main.c ressources.o -o Mastermind.exe -mwindows -lcomctl32 -lgdi32
 
 - **Windows uniquement** : le jeu repose sur les dialogues et les contrôles communs Win32.
 - **Français uniquement** : tous les textes de l'interface sont codés en dur.
-- Les scores sont lus et écrits dans le **répertoire courant** ; lancer l'exécutable depuis son dossier pour retrouver ses parties.
+- Les scores sont lus et écrits dans le **répertoire courant** et ignorés par Git ; lancer l'exécutable depuis le dossier qui les contient (ou depuis la racine du dépôt) pour retrouver ses parties.
 - Les fichiers de scores sont en **texte brut**, sans verrou ni protection : ils sont éditables et un nom contenant ` - ` perturbe l'analyse.
 - Le cumul est prévu pour **100 joueurs** par fichier (tableau `PS player[100]`) et le pseudo est tronqué à **31 caractères** dans la boîte de dialogue.
 - Si le dossier n'est pas accessible en écriture, la sauvegarde peut échouer sans message ; les scores affichés ne sont alors pas garantis d'être conservés.
