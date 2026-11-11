@@ -209,4 +209,4 @@ Distribué sous **GNU General Public License v3.0**. Voir [`LICENSE`](LICENSE).
 
 ## Auteurs
 
-Projet réalisé par **Abdelaziz Mohammad Aamer Al Harbi** et **Youssef Aziz**.
+Projet réalisé par **Abdelaziz Mohammad Aamer Al Harbi** ([@Azizfois2](https://github.com/Azizfois2)) et **Youssef Aziz** ([@azizyoussef1907-max](https://github.com/azizyoussef1907-max)).
