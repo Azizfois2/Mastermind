@@ -2,16 +2,17 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "Run Mastermind",
       "type": "cppdbg",
       "request": "launch",
+      "program": "${workspaceFolder}/build/Mastermind.exe",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "g:/My Drive/Mastermind/Projet",
-      "program": "g:/My Drive/Mastermind/Projet/build/Debug/outDebug",
+      "cwd": "${workspaceFolder}",
+      "externalConsole": false,
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "miDebuggerPath": "gdb.exe",
+      "preLaunchTask": "build",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",

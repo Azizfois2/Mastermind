@@ -8,7 +8,7 @@
 #include <string.h>
 #include <time.h>
 #include <commctrl.h>
-#include "ressources.h"
+#include "resources.h"
 
 // Variables globales
 int joker_used = 0;

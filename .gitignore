@@ -1,0 +1,23 @@
+# Build output
+build/*
+!build/.gitkeep
+*.o
+*.obj
+*.res
+*.exe
+
+# IDE / compiler generated files
+*.depend
+*.layout
+*_private.rc
+*_private.h
+*.cbTemp
+.vs/
+
+# Runtime data
+scores.txt
+scores2.txt
+
+# Archives
+*.rar
+*.zip

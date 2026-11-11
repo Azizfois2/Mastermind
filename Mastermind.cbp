@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Mastermind" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="default">
+				<Option output="build/Mastermind" prefix_auto="1" extension_auto="1" />
+				<Option object_output="build/obj" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-g" />
+					<Add option="-Wall" />
+					<Add option="-std=c99" />
+					<Add option="-finput-charset=CP1252" />
+					<Add option="-fexec-charset=CP1252" />
+					<Add directory="src" />
+					<Add directory="resources" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="src" />
+					<Add directory="resources" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-mwindows" />
+					<Add library="comctl32" />
+					<Add library="gdi32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/resources.h">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="resources/resources.rc">
+			<Option compilerVar="CPP" />
+		</Unit>
+		<Unit filename="resources/master.bmp" />
+		<Unit filename="resources/master.ico" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

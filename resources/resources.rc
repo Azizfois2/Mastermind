@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "ressources.h"
+#include "resources.h"
 
 IDI_MYICON ICON "master.ico"
 IDB_BOARD BITMAP "master.bmp"
