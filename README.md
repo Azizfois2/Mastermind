@@ -6,6 +6,8 @@
   <img alt="Licence" src="https://img.shields.io/badge/licence-GPL--3.0-blue">
 </p>
 
+**[Télécharger Mastermind.exe](https://github.com/Azizfois2/Mastermind/releases/latest/download/Mastermind.exe)** · **[Site officiel](https://azizfois2.github.io/Mastermind/)** · **[Toutes les versions](https://github.com/Azizfois2/Mastermind/releases)**
+
 Un Mastermind à **deux joueurs sur le même PC**, écrit en C avec l'API Win32. Le joueur 1 compose un code secret de cinq chiffres (ou en génère un au hasard), le joueur 2 doit le retrouver en vingt tentatives grâce aux indices « bien placés » et « mal placés ». La partie est entièrement graphique : fenêtre principale, dialogues Win32, bitmap de fond, icône, infobulles et menu.
 
 ## Sommaire
