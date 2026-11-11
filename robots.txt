@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://azizfois2.github.io/Mastermind/sitemap.xml
